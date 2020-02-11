@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,8 @@
 		C6D3DAB023F2FA8C00DDFA55 /* SearchCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3DAAF23F2FA8C00DDFA55 /* SearchCardsView.swift */; };
 		C6D3DAB423F2FABE00DDFA55 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3DAB323F2FABE00DDFA55 /* TabBar.swift */; };
 		C6DADE2323F2FF2000C0ADFF /* FlashCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DADE2223F2FF2000C0ADFF /* FlashCard.swift */; };
+		C6DADE2623F2FFB700C0ADFF /* CardsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DADE2523F2FFB700C0ADFF /* CardsAPIClient.swift */; };
+		C6DADE2923F2FFD800C0ADFF /* ImageKit in Frameworks */ = {isa = PBXBuildFile; productRef = C6DADE2823F2FFD800C0ADFF /* ImageKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,7 @@
 		C6D3DAAF23F2FA8C00DDFA55 /* SearchCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCardsView.swift; sourceTree = "<group>"; };
 		C6D3DAB323F2FABE00DDFA55 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		C6DADE2223F2FF2000C0ADFF /* FlashCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCard.swift; sourceTree = "<group>"; };
+		C6DADE2523F2FFB700C0ADFF /* CardsAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsAPIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6DADE2923F2FFD800C0ADFF /* ImageKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +97,7 @@
 			children = (
 				5790239723F2EE39000AA216 /* AppDelegate.swift */,
 				5790239923F2EE39000AA216 /* SceneDelegate.swift */,
+				C6DADE2423F2FF9600C0ADFF /* APIClient */,
 				C6DADE2123F2FF0200C0ADFF /* Model */,
 				C6D3DAB223F2FA9E00DDFA55 /* Views */,
 				C6D3DAB123F2FA9000DDFA55 /* Controllers */,
@@ -141,6 +146,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		C6DADE2423F2FF9600C0ADFF /* APIClient */ = {
+			isa = PBXGroup;
+			children = (
+				C6DADE2523F2FFB700C0ADFF /* CardsAPIClient.swift */,
+			);
+			path = APIClient;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -157,6 +170,9 @@
 			dependencies = (
 			);
 			name = Unit4Assessment;
+			packageProductDependencies = (
+				C6DADE2823F2FFD800C0ADFF /* ImageKit */,
+			);
 			productName = Unit4Assessment;
 			productReference = 5790239423F2EE39000AA216 /* Unit4Assessment.app */;
 			productType = "com.apple.product-type.application";
@@ -207,6 +223,9 @@
 				Base,
 			);
 			mainGroup = 5790238B23F2EE39000AA216;
+			packageReferences = (
+				C6DADE2723F2FFD800C0ADFF /* XCRemoteSwiftPackageReference "ImageKit" */,
+			);
 			productRefGroup = 5790239523F2EE39000AA216 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -243,6 +262,7 @@
 			files = (
 				C6D3DAB423F2FABE00DDFA55 /* TabBar.swift in Sources */,
 				C6D3DAAC23F2FA6100DDFA55 /* MyCardsView.swift in Sources */,
+				C6DADE2623F2FFB700C0ADFF /* CardsAPIClient.swift in Sources */,
 				C6D3DAAE23F2FA7B00DDFA55 /* CreateCardsView.swift in Sources */,
 				C6D3DAAA23F2FA5100DDFA55 /* SearchCardsViewController.swift in Sources */,
 				C6DADE2323F2FF2000C0ADFF /* FlashCard.swift in Sources */,
@@ -511,6 +531,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C6DADE2723F2FFD800C0ADFF /* XCRemoteSwiftPackageReference "ImageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alexpaul/ImageKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C6DADE2823F2FFD800C0ADFF /* ImageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C6DADE2723F2FFD800C0ADFF /* XCRemoteSwiftPackageReference "ImageKit" */;
+			productName = ImageKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5790238C23F2EE39000AA216 /* Project object */;
 }
