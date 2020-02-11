@@ -88,6 +88,10 @@ extension SearchCardsViewController: UICollectionViewDataSource {
 }
 extension SearchCardsViewController: SaveCreateCardsDelegate {
     func didCreateCard(card: Cards) {
+        if dataPersistence.hasItemBeenSaved(card) {
+            showAlert(title: "This card has already been saved", message: "you cannot save the same card twice")
+            return
+        }
         do {
             try dataPersistence.createItem(card)
             showAlert(title: "New Card Saved!", message: "this flashcard is now in your cards collection")

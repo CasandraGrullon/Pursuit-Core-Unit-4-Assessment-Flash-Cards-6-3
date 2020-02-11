@@ -71,9 +71,7 @@ class SearchCell: UICollectionViewCell {
             return
         }
         isPressed.toggle()
-        
         animate()
-        
     }
     private func animate() {
         if isPressed {
@@ -98,7 +96,6 @@ class SearchCell: UICollectionViewCell {
             addButton.heightAnchor.constraint(equalToConstant: 44),
             addButton.widthAnchor.constraint(equalTo: addButton.heightAnchor)
         ])
-        
     }
     private func titleConstraints() {
         addSubview(cardTitle)

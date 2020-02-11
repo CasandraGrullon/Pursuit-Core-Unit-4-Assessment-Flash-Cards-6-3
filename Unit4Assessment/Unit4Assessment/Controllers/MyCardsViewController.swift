@@ -14,7 +14,7 @@ class MyCardsViewController: UIViewController {
     private var mycardsView = MyCardsView()
     public var dataPersistence: DataPersistence<Cards>!
     
-    private var myCards = [Cards]() {
+    public var myCards = [Cards]() {
         didSet {
             mycardsView.collectionView.reloadData()
             if myCards.isEmpty {
@@ -31,7 +31,6 @@ class MyCardsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         mycardsView.collectionView.delegate = self
         mycardsView.collectionView.dataSource = self
         mycardsView.collectionView.register(MyCardsCell.self, forCellWithReuseIdentifier: "myCardsCell")
@@ -72,8 +71,8 @@ extension MyCardsViewController: UICollectionViewDataSource {
         let mycard = myCards[indexPath.row]
         cell.configureCell(for: mycard)
         cell.backgroundColor = .white
-        cell.delegate = self
         cell.selectedCard = mycard
+        cell.delegate = self
         return cell
     }    
     
@@ -88,52 +87,29 @@ extension MyCardsViewController: DataPersistenceDelegate {
         print("did delete item")
         loadMyCards()
     }
-    
-    
 }
-extension MyCardsViewController: SaveCreateCardsDelegate {
-    func didCreateCard(card: Cards) {
+
+extension MyCardsViewController: CellDetailsDelegate {
+    func didPressButton(cell: MyCardsCell, card: Cards) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] (action) in
-            self?.deleteCard(card: card)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+            self.deleteCard(card: card)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertController.addAction(cancelAction)
         alertController.addAction(deleteAction)
+        present(alertController, animated: true)
     }
     
     private func deleteCard(card: Cards) {
         guard let index = myCards.firstIndex(of: card) else {
             return
         }
-        
         do{
             try dataPersistence.deleteItem(at: index)
-        }catch {
             showAlert(title: "Deleted", message: "card was successfully deleted")
+        }catch {
+            showAlert(title: "Error", message: "card could not be deleted")
         }
     }
 }
-
-//extension MyCardsViewController: CellDetailsDelegate {
-//    func didPressButton(cell: MyCardsCell, card: Cards) {
-//        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] (action) in
-//            self?.deleteCard(card: card)
-//        }
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-//        alertController.addAction(cancelAction)
-//        alertController.addAction(deleteAction)
-//    }
-//    private func deleteCard(card: Cards) {
-//        guard let index = myCards.firstIndex(of: card) else {
-//            return
-//        }
-//
-//        do{
-//            try dataPersistence.deleteItem(at: index)
-//        }catch {
-//            showAlert(title: "Deleted", message: "card was successfully deleted")
-//        }
-//    }
-//}

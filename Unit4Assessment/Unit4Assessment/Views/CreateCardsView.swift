@@ -42,28 +42,44 @@ class CreateCardsView: UIView {
     }()
     public lazy var factOneText: UITextView = {
         let textView = UITextView()
-        textView.textColor = .systemGray
+        textView.textColor = .black
         textView.isSelectable = true
         textView.isEditable = true
         return textView
     }()
     public lazy var factTwoText: UITextView = {
         let textView = UITextView()
-        textView.textColor = .systemGray
+        textView.textColor = .black
         textView.isEditable = true
         textView.isSelectable = true
         return textView
     }()
+    public lazy var alert: UILabel = {
+       let label = UILabel()
+        label.text = "All fields are required"
+        label.textAlignment = .center
+        label.textColor = .red
+        label.alpha = 0
+        return label
+    }()
     
     @objc private func saveButtonPressed(_ sender: UIButton) {
-        let fields = [titleTextField.text, factOneText.text, factTwoText.text]
-        if fields.isEmpty {
+        if titleTextField.text?.isEmpty ?? true || factOneText.text.isEmpty || factTwoText.text.isEmpty {
             sender.isEnabled = false
+            animate()
         } else {
+            sender.isEnabled = true
             let newCard = Cards(quizTitle: titleTextField.text ?? "", facts: [factOneText.text, factTwoText.text])
             delegate?.didCreateCard(card: newCard)
         }
+        sender.isEnabled = true
     }
+    private func animate() {
+        UIView.transition(with: self, duration: 1.0, options: [.curveLinear], animations: {
+            self.alert.alpha = 1.0
+        }, completion: nil)
+    }
+        
     @objc private func cancleButtonPressed(_ sender: UIButton) {
         titleTextField.text = ""
         factOneText.text = ""
@@ -84,6 +100,7 @@ class CreateCardsView: UIView {
         textFieldConstraints()
         textView1Constraints()
         textView2Constraints()
+        alertConstraints()
     }
     private func stackViewConstraints() {
         addSubview(buttonStack)
@@ -123,6 +140,15 @@ class CreateCardsView: UIView {
             factTwoText.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             factTwoText.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             factTwoText.heightAnchor.constraint(equalToConstant: 100)
+        ])
+    }
+    private func alertConstraints() {
+        addSubview(alert)
+        alert.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            alert.topAnchor.constraint(equalTo: factTwoText.bottomAnchor, constant: 10),
+            alert.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
+            alert.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40)
         ])
     }
     
