@@ -79,12 +79,10 @@ extension MyCardsViewController: UICollectionViewDataSource {
 }
 extension MyCardsViewController: DataPersistenceDelegate {
     func didSaveItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
-        print("did save item")
         loadMyCards()
     }
     
     func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
-        print("did delete item")
         loadMyCards()
     }
 }

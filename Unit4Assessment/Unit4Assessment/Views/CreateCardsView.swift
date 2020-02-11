@@ -71,6 +71,7 @@ class CreateCardsView: UIView {
             sender.isEnabled = true
             let newCard = Cards(quizTitle: titleTextField.text ?? "", facts: [factOneText.text, factTwoText.text])
             delegate?.didCreateCard(card: newCard)
+            alert.alpha = 0
         }
         sender.isEnabled = true
     }
@@ -85,6 +86,7 @@ class CreateCardsView: UIView {
         factOneText.text = ""
         factTwoText.text = ""
         saveButton.isEnabled = false
+        alert.alpha = 0
     }
     
     override init(frame: CGRect) {
