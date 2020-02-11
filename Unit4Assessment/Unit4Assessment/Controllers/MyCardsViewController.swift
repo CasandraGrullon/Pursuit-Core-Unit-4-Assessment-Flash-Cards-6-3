@@ -54,8 +54,8 @@ class MyCardsViewController: UIViewController {
 extension MyCardsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let maxsize: CGSize = UIScreen.main.bounds.size
-        let itemWidth: CGFloat = maxsize.width
-        let itemHeight: CGFloat = maxsize.height * 0.20
+        let itemWidth: CGFloat = maxsize.width * 0.8
+        let itemHeight: CGFloat = maxsize.height * 0.30
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
@@ -72,6 +72,7 @@ extension MyCardsViewController: UICollectionViewDataSource {
         let mycard = myCards[indexPath.row]
         cell.configureCell(for: mycard)
         cell.backgroundColor = .white
+        cell.delegate = self
         return cell
     }
     
@@ -89,4 +90,26 @@ extension MyCardsViewController: DataPersistenceDelegate {
     }
     
     
+}
+extension MyCardsViewController: CellDetailsDelegate {
+    func didPressButton(cell: MyCardsCell, card: Cards) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] (action) in
+            self?.deleteCard(card: card)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+    }
+    private func deleteCard(card: Cards) {
+        guard let index = myCards.firstIndex(of: card) else {
+            return
+        }
+        
+        do{
+            try dataPersistence.deleteItem(at: index)
+        }catch {
+            showAlert(title: "Deleted", message: "card was successfully deleted")
+        }
+    }
 }

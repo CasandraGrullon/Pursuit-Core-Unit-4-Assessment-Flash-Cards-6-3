@@ -15,7 +15,7 @@ class SearchCardsView: UIView {
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: 100, height: 100)
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = #colorLiteral(red: 0.7739111781, green: 1, blue: 0.8726517558, alpha: 1)
+        cv.backgroundColor = #colorLiteral(red: 1, green: 0.818012774, blue: 0.9189140201, alpha: 1)
         return cv
     }()
     override init(frame: CGRect) {

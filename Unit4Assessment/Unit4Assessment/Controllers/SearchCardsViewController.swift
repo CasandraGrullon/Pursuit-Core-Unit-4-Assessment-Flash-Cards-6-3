@@ -83,8 +83,8 @@ extension SearchCardsViewController: UICollectionViewDataSource {
         return cell
     }
 }
-extension SearchCardsViewController: AddCardDelegate {
-    func didAddCard(_ cell: SearchCell, card: Cards) {
+extension SearchCardsViewController: SaveCreateCardsDelegate {
+    func didCreateCard(card: Cards) {
         do {
             try dataPersistence.createItem(card)
             showAlert(title: "New Card Saved!", message: "this flashcard is now in your cards collection")
@@ -93,14 +93,4 @@ extension SearchCardsViewController: AddCardDelegate {
             showAlert(title: "Oops...", message: "unable to save \(error)")
         }
     }
-    
-//    func didCreateCard(card: Cards) {
-//        do {
-//            try dataPersistence.createItem(card)
-//            showAlert(title: "New Card Saved!", message: "this flashcard is now in your cards collection")
-//        } catch {
-//            print("could not save \(error)")
-//            showAlert(title: "Oops...", message: "unable to save \(error)")
-//        }
-//    }
 }

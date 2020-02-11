@@ -8,20 +8,16 @@
 
 import UIKit
 
-protocol AddCardDelegate: AnyObject {
-    func didAddCard(_ cell: SearchCell, card: Cards)
-}
-
 class SearchCell: UICollectionViewCell {
     
-    weak var delegate: AddCardDelegate?
+    weak var delegate: SaveCreateCardsDelegate?
     
     private var selectedCard: Cards!
     
     public lazy var cardTitle: UILabel = {
        let label = UILabel()
         label.text = "flash card sample"
-        label.numberOfLines = 3
+        label.numberOfLines = 2
         return label
     }()
     public lazy var addButton: UIButton = {
@@ -30,15 +26,6 @@ class SearchCell: UICollectionViewCell {
         button.addTarget(self, action: #selector(addButtonPressed(_:)), for: .touchUpInside)
         return button
     }()
-    
-    @objc public func addButtonPressed(_ sender: UIButton) {
-        sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-        guard let card = selectedCard else {
-            return
-        }
-        delegate?.didAddCard(self, card: card)
-        print("button pressed")
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,6 +40,14 @@ class SearchCell: UICollectionViewCell {
         titleConstraints()
     }
 
+    @objc public func addButtonPressed(_ sender: UIButton) {
+        sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        guard let card = selectedCard else {
+            return
+        }
+        delegate?.didCreateCard(card: card)
+        print("button pressed")
+    }
     private func buttonConstraints() {
         addSubview(addButton)
         addButton.translatesAutoresizingMaskIntoConstraints = false
