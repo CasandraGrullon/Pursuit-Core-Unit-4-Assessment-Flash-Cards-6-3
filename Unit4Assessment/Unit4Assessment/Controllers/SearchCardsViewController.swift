@@ -82,6 +82,7 @@ extension SearchCardsViewController: UICollectionViewDataSource {
         cell.backgroundColor = .white
         return cell
     }
+    
 }
 extension SearchCardsViewController: SaveCreateCardsDelegate {
     func didCreateCard(card: Cards) {

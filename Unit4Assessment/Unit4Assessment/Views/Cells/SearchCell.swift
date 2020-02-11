@@ -14,11 +14,12 @@ class SearchCell: UICollectionViewCell {
     
     private var selectedCard: Cards!
     
-    public lazy var cardTitle: UILabel = {
-       let label = UILabel()
-        label.text = "flash card sample"
-        label.numberOfLines = 2
-        return label
+    private var isPressed = false
+    
+    private lazy var longPressGesture: UILongPressGestureRecognizer = {
+       let gesture = UILongPressGestureRecognizer()
+        gesture.addTarget(self, action: #selector(longPressed(_:)))
+        return gesture
     }()
     public lazy var addButton: UIButton = {
        let button = UIButton()
@@ -26,6 +27,22 @@ class SearchCell: UICollectionViewCell {
         button.addTarget(self, action: #selector(addButtonPressed(_:)), for: .touchUpInside)
         return button
     }()
+    
+    public lazy var cardTitle: UILabel = {
+       let label = UILabel()
+        label.text = "flash card sample"
+        label.numberOfLines = 2
+        label.alpha = 1
+        return label
+    }()
+    
+    public lazy var answers: UILabel = {
+       let label = UILabel()
+        label.numberOfLines = 0
+        label.alpha = 0
+        return label
+    }()
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,6 +55,8 @@ class SearchCell: UICollectionViewCell {
     private func commonInit() {
         buttonConstraints()
         titleConstraints()
+        answersConstraints()
+        addGestureRecognizer(longPressGesture)
     }
 
     @objc public func addButtonPressed(_ sender: UIButton) {
@@ -48,6 +67,30 @@ class SearchCell: UICollectionViewCell {
         delegate?.didCreateCard(card: card)
         print("button pressed")
     }
+    
+    @objc private func longPressed(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began || gesture.state == .changed {
+            return
+        }
+        isPressed.toggle()
+        
+        animate()
+        
+    }
+    private func animate() {
+        if isPressed {
+            UIView.transition(with: self, duration: 1.0, options: [.transitionFlipFromRight], animations: {
+                self.answers.alpha = 1.0
+                self.cardTitle.alpha = 0
+            }, completion: nil)
+        } else {
+            UIView.transition(with: self, duration: 1.0, options: [.transitionFlipFromLeft], animations: {
+                self.answers.alpha = 0
+                self.cardTitle.alpha = 1.0
+            }, completion: nil)
+        }
+    }
+    
     private func buttonConstraints() {
         addSubview(addButton)
         addButton.translatesAutoresizingMaskIntoConstraints = false
@@ -68,7 +111,19 @@ class SearchCell: UICollectionViewCell {
             cardTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
+    private func answersConstraints() {
+        addSubview(answers)
+        answers.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            answers.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            answers.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            answers.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            answers.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
     public func configureCell(for card: Cards) {
         cardTitle.text = card.quizTitle
+        answers.text = "\(card.facts.first ?? "") \n\(card.facts.last ?? "")"
     }
 }
