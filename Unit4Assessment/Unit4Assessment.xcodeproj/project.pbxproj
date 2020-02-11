@@ -19,6 +19,7 @@
 		C6D3DAAE23F2FA7B00DDFA55 /* CreateCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3DAAD23F2FA7B00DDFA55 /* CreateCardsView.swift */; };
 		C6D3DAB023F2FA8C00DDFA55 /* SearchCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3DAAF23F2FA8C00DDFA55 /* SearchCardsView.swift */; };
 		C6D3DAB423F2FABE00DDFA55 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3DAB323F2FABE00DDFA55 /* TabBar.swift */; };
+		C6DADE2323F2FF2000C0ADFF /* FlashCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DADE2223F2FF2000C0ADFF /* FlashCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		C6D3DAAD23F2FA7B00DDFA55 /* CreateCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCardsView.swift; sourceTree = "<group>"; };
 		C6D3DAAF23F2FA8C00DDFA55 /* SearchCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCardsView.swift; sourceTree = "<group>"; };
 		C6D3DAB323F2FABE00DDFA55 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		C6DADE2223F2FF2000C0ADFF /* FlashCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			children = (
 				5790239723F2EE39000AA216 /* AppDelegate.swift */,
 				5790239923F2EE39000AA216 /* SceneDelegate.swift */,
+				C6DADE2123F2FF0200C0ADFF /* Model */,
 				C6D3DAB223F2FA9E00DDFA55 /* Views */,
 				C6D3DAB123F2FA9000DDFA55 /* Controllers */,
 				579023A023F2EE3B000AA216 /* Assets.xcassets */,
@@ -128,6 +131,14 @@
 				C6D3DAAF23F2FA8C00DDFA55 /* SearchCardsView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C6DADE2123F2FF0200C0ADFF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C6DADE2223F2FF2000C0ADFF /* FlashCard.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +245,7 @@
 				C6D3DAAC23F2FA6100DDFA55 /* MyCardsView.swift in Sources */,
 				C6D3DAAE23F2FA7B00DDFA55 /* CreateCardsView.swift in Sources */,
 				C6D3DAAA23F2FA5100DDFA55 /* SearchCardsViewController.swift in Sources */,
+				C6DADE2323F2FF2000C0ADFF /* FlashCard.swift in Sources */,
 				5790239823F2EE39000AA216 /* AppDelegate.swift in Sources */,
 				5790239A23F2EE39000AA216 /* SceneDelegate.swift in Sources */,
 				C6D3DAA823F2FA4400DDFA55 /* CreateCardsViewController.swift in Sources */,
