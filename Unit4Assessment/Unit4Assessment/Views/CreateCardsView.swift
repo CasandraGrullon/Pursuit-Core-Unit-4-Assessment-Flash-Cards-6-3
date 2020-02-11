@@ -8,24 +8,30 @@
 
 import UIKit
 
-class CreateCardsView: UIView {
+protocol CreateCardsDelegate: AnyObject {
+    func didCreateCard(card: Cards)
+}
 
+class CreateCardsView: UIView {
+    
+    weak var delegate: CreateCardsDelegate?
+    
     public lazy var buttonStack: UIStackView = {
-       let stack = UIStackView(arrangedSubviews: [cancelButton, saveButton])
+        let stack = UIStackView(arrangedSubviews: [cancelButton, saveButton])
         stack.axis = .horizontal
         stack.distribution = .fillEqually
         return stack
     }()
     public lazy var cancelButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setTitle("Cancel", for: .normal)
-        //TODO: add target
+        button.addTarget(self, action: #selector(cancleButtonPressed(_:)), for: .touchUpInside)
         return button
     }()
     public lazy var saveButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setTitle("Create", for: .normal)
-        //TODO: add target
+        button.addTarget(self, action: #selector(saveButtonPressed(_:)), for: .touchUpInside)
         return button
     }()
     public lazy var titleTextField: UITextField = {
@@ -35,21 +41,36 @@ class CreateCardsView: UIView {
         return textField
     }()
     public lazy var factOneText: UITextView = {
-       let textView = UITextView()
-        textView.text = "enter description 1"
+        let textView = UITextView()
         textView.textColor = .systemGray
         textView.isSelectable = true
         textView.isEditable = true
         return textView
     }()
     public lazy var factTwoText: UITextView = {
-       let textView = UITextView()
-        textView.text = "enter description 2"
+        let textView = UITextView()
         textView.textColor = .systemGray
         textView.isEditable = true
         textView.isSelectable = true
         return textView
     }()
+    @objc private func saveButtonPressed(_ sender: UIButton) {
+        if !(titleTextField.text?.isEmpty ?? false) && !factTwoText.text.isEmpty && !factOneText.text.isEmpty {
+            let newCard = Cards(cardTitle: titleTextField.text ?? "", facts: [factOneText.text, factTwoText.text])
+            delegate?.didCreateCard(card: newCard)
+            //TODO: add a showalert to tell users their card was successfully created
+        } else {
+            sender.isEnabled = false
+            //TODO: add showalert to tell users all fields are required
+        }
+    }
+    @objc private func cancleButtonPressed(_ sender: UIButton) {
+        titleTextField.text = ""
+        factOneText.text = ""
+        factTwoText.text = ""
+        saveButton.isEnabled = false
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -104,5 +125,5 @@ class CreateCardsView: UIView {
             factTwoText.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
-
+    
 }

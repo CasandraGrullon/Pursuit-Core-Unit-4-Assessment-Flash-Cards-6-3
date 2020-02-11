@@ -9,6 +9,7 @@
 import UIKit
 
 class SearchCell: UICollectionViewCell {
+    
     public lazy var cardTitle: UILabel = {
        let label = UILabel()
         label.text = "flash card sample"
@@ -18,8 +19,6 @@ class SearchCell: UICollectionViewCell {
     public lazy var addButton: UIButton = {
        let button = UIButton()
         button.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
-        //TODO: add action
-        button.setTitleColor(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1), for: .normal)
         return button
     }()
     

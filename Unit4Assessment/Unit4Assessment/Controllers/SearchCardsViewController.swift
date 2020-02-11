@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import DataPersistence
 
 class SearchCardsViewController: UIViewController {
 
     private let searchView = SearchCardsView()
+    
+    public var dataPersistence: DataPersistence<Cards>!
     
     override func loadView() {
         view = searchView
@@ -54,6 +57,7 @@ extension SearchCardsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
+
 }
 extension SearchCardsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import DataPersistence
 
 class MyCardsViewController: UIViewController {
     
     private var mycardsView = MyCardsView()
+    public var dataPersistence: DataPersistence<Cards>!
     
     override func loadView() {
         view = mycardsView
@@ -23,6 +25,7 @@ class MyCardsViewController: UIViewController {
                 mycardsView.collectionView.backgroundView = EmptyView.init(title: "No Flash Cards", message: "Create your own flashcards or search for preset cards in the other tabs")
             } else {
                 mycardsView.collectionView.backgroundView = nil
+                loadMyCards()
             }
         }
     }
@@ -32,13 +35,20 @@ class MyCardsViewController: UIViewController {
         mycardsView.collectionView.delegate = self
         mycardsView.collectionView.dataSource = self
         mycardsView.collectionView.register(MyCardsCell.self, forCellWithReuseIdentifier: "myCardsCell")
+        
     }
     
+    private func loadMyCards() {
+        do {
+            myCards = try dataPersistence.loadItems()
+        } catch {
+            print("could not load cards \(error)")
+        }
+    }
     
 }
 
 extension MyCardsViewController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let maxsize: CGSize = UIScreen.main.bounds.size
         let itemWidth: CGFloat = maxsize.width
