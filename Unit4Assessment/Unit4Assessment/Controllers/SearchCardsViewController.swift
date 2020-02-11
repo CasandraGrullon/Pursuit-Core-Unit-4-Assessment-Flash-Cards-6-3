@@ -29,7 +29,8 @@ class SearchCardsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getCards()
+        //getCards()
+        getLocalCards()
         searchView.collectionView.delegate = self
         searchView.collectionView.dataSource = self
         searchView.collectionView.register(SearchCell.self, forCellWithReuseIdentifier: "searchCell")
@@ -44,6 +45,13 @@ class SearchCardsViewController: UIViewController {
             case .success(let cards):
                 self?.presetCards = cards
             }
+        }
+    }
+    private func getLocalCards() {
+        do {
+            presetCards = try FlashCardService.getlocalCards()
+        } catch {
+            print("could not get data")
         }
     }
 }
@@ -75,12 +83,24 @@ extension SearchCardsViewController: UICollectionViewDataSource {
         return cell
     }
 }
-extension SearchCardsViewController: SaveCreateCardsDelegate {
-    func didCreateCard(card: Cards) {
+extension SearchCardsViewController: AddCardDelegate {
+    func didAddCard(_ cell: SearchCell, card: Cards) {
         do {
             try dataPersistence.createItem(card)
+            showAlert(title: "New Card Saved!", message: "this flashcard is now in your cards collection")
         } catch {
             print("could not save \(error)")
+            showAlert(title: "Oops...", message: "unable to save \(error)")
         }
     }
+    
+//    func didCreateCard(card: Cards) {
+//        do {
+//            try dataPersistence.createItem(card)
+//            showAlert(title: "New Card Saved!", message: "this flashcard is now in your cards collection")
+//        } catch {
+//            print("could not save \(error)")
+//            showAlert(title: "Oops...", message: "unable to save \(error)")
+//        }
+//    }
 }

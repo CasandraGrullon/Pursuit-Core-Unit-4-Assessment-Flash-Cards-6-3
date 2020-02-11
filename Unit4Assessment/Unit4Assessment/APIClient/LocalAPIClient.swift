@@ -14,8 +14,8 @@ public enum ServiceError: Error {
   case decodingError(Error)
 }
 
-class LocalDataAPI {
-  public static func getCards() throws -> [Cards] {
+final class FlashCardService {
+  public static func getlocalCards() throws -> [Cards] {
     guard let path = Bundle.main.path(forResource: "FlashCards", ofType: "json") else {
       throw ServiceError.resourcePathDoesNotExist
     }
@@ -23,8 +23,8 @@ class LocalDataAPI {
       throw ServiceError.contentsNotFound
     }
     do {
-      let stocks = try JSONDecoder().decode(FlashCards.self, from: json)
-        return stocks.cards
+      let results = try JSONDecoder().decode([Cards].self, from: json)
+        return results
     } catch {
       throw ServiceError.decodingError(error)
     }

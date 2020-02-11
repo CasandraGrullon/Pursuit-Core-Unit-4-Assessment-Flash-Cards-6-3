@@ -31,10 +31,14 @@ class MyCardsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //loadMyCards()
+        
         mycardsView.collectionView.delegate = self
         mycardsView.collectionView.dataSource = self
         mycardsView.collectionView.register(MyCardsCell.self, forCellWithReuseIdentifier: "myCardsCell")
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        loadMyCards()
     }
     
     func loadMyCards() {

@@ -54,14 +54,14 @@ class CreateCardsView: UIView {
         textView.isSelectable = true
         return textView
     }()
+    
     @objc private func saveButtonPressed(_ sender: UIButton) {
-        if !(titleTextField.text?.isEmpty ?? false) && !factTwoText.text.isEmpty && !factOneText.text.isEmpty {
-            let newCard = Cards(cardTitle: titleTextField.text ?? "", facts: [factOneText.text, factTwoText.text])
-            delegate?.didCreateCard(card: newCard)
-            //TODO: add a showalert to tell users their card was successfully created
-        } else {
+        let fields = [titleTextField.text, factOneText.text, factTwoText.text]
+        if fields.isEmpty {
             sender.isEnabled = false
-            //TODO: add showalert to tell users all fields are required
+        } else {
+            let newCard = Cards(quizTitle: titleTextField.text ?? "", facts: [factOneText.text, factTwoText.text])
+            delegate?.didCreateCard(card: newCard)
         }
     }
     @objc private func cancleButtonPressed(_ sender: UIButton) {

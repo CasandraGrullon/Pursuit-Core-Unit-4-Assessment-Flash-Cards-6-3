@@ -38,6 +38,6 @@ class MyCardsCell: UICollectionViewCell {
         ])
     }
     public func configureCell(for card: Cards) {
-        cardTitle.text = card.cardTitle
+        cardTitle.text = card.quizTitle
     }
 }

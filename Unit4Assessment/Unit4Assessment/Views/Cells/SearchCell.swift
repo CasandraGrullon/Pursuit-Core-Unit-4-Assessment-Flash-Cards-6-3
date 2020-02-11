@@ -8,11 +8,15 @@
 
 import UIKit
 
+protocol AddCardDelegate: AnyObject {
+    func didAddCard(_ cell: SearchCell, card: Cards)
+}
+
 class SearchCell: UICollectionViewCell {
     
-    weak var delegate: SaveCreateCardsDelegate?
+    weak var delegate: AddCardDelegate?
     
-    private var selecetedCard: Cards!
+    private var selectedCard: Cards!
     
     public lazy var cardTitle: UILabel = {
        let label = UILabel()
@@ -27,12 +31,13 @@ class SearchCell: UICollectionViewCell {
         return button
     }()
     
-    @objc private func addButtonPressed(_ sender: UIButton) {
-        sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .selected)
-        guard let card = selecetedCard else {
+    @objc public func addButtonPressed(_ sender: UIButton) {
+        sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        guard let card = selectedCard else {
             return
         }
-        delegate?.didCreateCard(card: card)
+        delegate?.didAddCard(self, card: card)
+        print("button pressed")
     }
     
     override init(frame: CGRect) {
@@ -53,8 +58,8 @@ class SearchCell: UICollectionViewCell {
         addButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             addButton.topAnchor.constraint(equalTo: topAnchor),
-            addButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-            addButton.heightAnchor.constraint(equalToConstant: 44)
+            addButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            addButton.heightAnchor.constraint(equalToConstant: 60)
         ])
         
     }
@@ -69,6 +74,6 @@ class SearchCell: UICollectionViewCell {
         ])
     }
     public func configureCell(for card: Cards) {
-        cardTitle.text = card.cardTitle
+        cardTitle.text = card.quizTitle
     }
 }
