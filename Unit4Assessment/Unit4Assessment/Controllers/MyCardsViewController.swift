@@ -14,10 +14,6 @@ class MyCardsViewController: UIViewController {
     private var mycardsView = MyCardsView()
     public var dataPersistence: DataPersistence<Cards>!
     
-    override func loadView() {
-        view = mycardsView
-    }
-    
     private var myCards = [Cards]() {
         didSet {
             mycardsView.collectionView.reloadData()
@@ -25,20 +21,23 @@ class MyCardsViewController: UIViewController {
                 mycardsView.collectionView.backgroundView = EmptyView.init(title: "No Flash Cards", message: "Create your own flashcards or search for preset cards in the other tabs")
             } else {
                 mycardsView.collectionView.backgroundView = nil
-                loadMyCards()
             }
         }
     }
     
+    override func loadView() {
+        view = mycardsView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //loadMyCards()
         mycardsView.collectionView.delegate = self
         mycardsView.collectionView.dataSource = self
         mycardsView.collectionView.register(MyCardsCell.self, forCellWithReuseIdentifier: "myCardsCell")
-        
     }
     
-    private func loadMyCards() {
+    func loadMyCards() {
         do {
             myCards = try dataPersistence.loadItems()
         } catch {
@@ -70,6 +69,19 @@ extension MyCardsViewController: UICollectionViewDataSource {
         cell.configureCell(for: mycard)
         cell.backgroundColor = .white
         return cell
+    }
+    
+    
+}
+extension MyCardsViewController: DataPersistenceDelegate {
+    func didSaveItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
+        print("did save item")
+        loadMyCards()
+    }
+    
+    func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
+        print("did delete item")
+        loadMyCards()
     }
     
     

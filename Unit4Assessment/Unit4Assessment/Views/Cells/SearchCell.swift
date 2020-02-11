@@ -10,6 +10,10 @@ import UIKit
 
 class SearchCell: UICollectionViewCell {
     
+    weak var delegate: SaveCreateCardsDelegate?
+    
+    private var selecetedCard: Cards!
+    
     public lazy var cardTitle: UILabel = {
        let label = UILabel()
         label.text = "flash card sample"
@@ -19,8 +23,17 @@ class SearchCell: UICollectionViewCell {
     public lazy var addButton: UIButton = {
        let button = UIButton()
         button.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
+        button.addTarget(self, action: #selector(addButtonPressed(_:)), for: .touchUpInside)
         return button
     }()
+    
+    @objc private func addButtonPressed(_ sender: UIButton) {
+        sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .selected)
+        guard let card = selecetedCard else {
+            return
+        }
+        delegate?.didCreateCard(card: card)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

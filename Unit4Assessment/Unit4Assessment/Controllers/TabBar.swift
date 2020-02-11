@@ -18,6 +18,7 @@ class TabBar: UITabBarController {
         vc.tabBarItem = UITabBarItem(title: "My Cards", image: UIImage(systemName: "square.stack.3d.up.fill"), tag: 0)
         vc.view.backgroundColor = #colorLiteral(red: 0.7739111781, green: 1, blue: 0.8726517558, alpha: 1)
         vc.dataPersistence = dataPersistence
+        vc.dataPersistence.delegate = vc
         return vc
     }()
     private lazy var createCardsVC: CreateCardsViewController = {

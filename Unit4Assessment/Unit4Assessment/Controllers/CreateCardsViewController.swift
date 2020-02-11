@@ -38,7 +38,7 @@ extension CreateCardsViewController: UITextViewDelegate {
         textField.resignFirstResponder()
     }
 }
-extension CreateCardsViewController: CreateCardsDelegate {
+extension CreateCardsViewController: SaveCreateCardsDelegate {
     func didCreateCard(card: Cards) {
         do {
             try dataPersistence.createItem(card)

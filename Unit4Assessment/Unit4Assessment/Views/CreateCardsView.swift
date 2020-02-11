@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol CreateCardsDelegate: AnyObject {
+protocol SaveCreateCardsDelegate: AnyObject {
     func didCreateCard(card: Cards)
 }
 
 class CreateCardsView: UIView {
     
-    weak var delegate: CreateCardsDelegate?
+    weak var delegate: SaveCreateCardsDelegate?
     
     public lazy var buttonStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [cancelButton, saveButton])

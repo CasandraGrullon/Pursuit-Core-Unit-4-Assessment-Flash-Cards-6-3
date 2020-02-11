@@ -70,9 +70,17 @@ extension SearchCardsViewController: UICollectionViewDataSource {
         }
         let card = presetCards[indexPath.row]
         cell.configureCell(for: card)
+        cell.delegate = self
         cell.backgroundColor = .white
         return cell
     }
-    
-    
+}
+extension SearchCardsViewController: SaveCreateCardsDelegate {
+    func didCreateCard(card: Cards) {
+        do {
+            try dataPersistence.createItem(card)
+        } catch {
+            print("could not save \(error)")
+        }
+    }
 }
