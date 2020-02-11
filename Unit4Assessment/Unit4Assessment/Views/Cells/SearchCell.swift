@@ -12,7 +12,7 @@ class SearchCell: UICollectionViewCell {
     
     weak var delegate: SaveCreateCardsDelegate?
     
-    private var selectedCard: Cards!
+    public var selectedCard: Cards?
     
     private var isPressed = false
     
@@ -61,11 +61,9 @@ class SearchCell: UICollectionViewCell {
 
     @objc public func addButtonPressed(_ sender: UIButton) {
         sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-        guard let card = selectedCard else {
-            return
+        if let card = selectedCard {
+            delegate?.didCreateCard(card: card)
         }
-        delegate?.didCreateCard(card: card)
-        print("button pressed")
     }
     
     @objc private func longPressed(_ gesture: UILongPressGestureRecognizer) {
@@ -97,7 +95,8 @@ class SearchCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             addButton.topAnchor.constraint(equalTo: topAnchor),
             addButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            addButton.heightAnchor.constraint(equalToConstant: 60)
+            addButton.heightAnchor.constraint(equalToConstant: 44),
+            addButton.widthAnchor.constraint(equalTo: addButton.heightAnchor)
         ])
         
     }

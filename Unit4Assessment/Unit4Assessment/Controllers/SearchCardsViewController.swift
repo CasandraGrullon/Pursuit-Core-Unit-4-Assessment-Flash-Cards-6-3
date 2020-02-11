@@ -54,6 +54,7 @@ class SearchCardsViewController: UIViewController {
             print("could not get data")
         }
     }
+
 }
 extension SearchCardsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -80,6 +81,7 @@ extension SearchCardsViewController: UICollectionViewDataSource {
         cell.configureCell(for: card)
         cell.delegate = self
         cell.backgroundColor = .white
+        cell.selectedCard = card
         return cell
     }
     

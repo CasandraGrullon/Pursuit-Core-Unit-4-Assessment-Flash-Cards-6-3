@@ -73,9 +73,9 @@ extension MyCardsViewController: UICollectionViewDataSource {
         cell.configureCell(for: mycard)
         cell.backgroundColor = .white
         cell.delegate = self
+        cell.selectedCard = mycard
         return cell
-    }
-    
+    }    
     
 }
 extension MyCardsViewController: DataPersistenceDelegate {
@@ -91,8 +91,8 @@ extension MyCardsViewController: DataPersistenceDelegate {
     
     
 }
-extension MyCardsViewController: CellDetailsDelegate {
-    func didPressButton(cell: MyCardsCell, card: Cards) {
+extension MyCardsViewController: SaveCreateCardsDelegate {
+    func didCreateCard(card: Cards) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] (action) in
             self?.deleteCard(card: card)
@@ -101,6 +101,7 @@ extension MyCardsViewController: CellDetailsDelegate {
         alertController.addAction(cancelAction)
         alertController.addAction(deleteAction)
     }
+    
     private func deleteCard(card: Cards) {
         guard let index = myCards.firstIndex(of: card) else {
             return
@@ -113,3 +114,26 @@ extension MyCardsViewController: CellDetailsDelegate {
         }
     }
 }
+
+//extension MyCardsViewController: CellDetailsDelegate {
+//    func didPressButton(cell: MyCardsCell, card: Cards) {
+//        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+//        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] (action) in
+//            self?.deleteCard(card: card)
+//        }
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+//        alertController.addAction(cancelAction)
+//        alertController.addAction(deleteAction)
+//    }
+//    private func deleteCard(card: Cards) {
+//        guard let index = myCards.firstIndex(of: card) else {
+//            return
+//        }
+//
+//        do{
+//            try dataPersistence.deleteItem(at: index)
+//        }catch {
+//            showAlert(title: "Deleted", message: "card was successfully deleted")
+//        }
+//    }
+//}

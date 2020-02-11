@@ -8,15 +8,11 @@
 
 import UIKit
 
-protocol CellDetailsDelegate: AnyObject {
-    func didPressButton(cell: MyCardsCell, card: Cards)
-}
-
 class MyCardsCell: UICollectionViewCell {
  
-    weak var delegate: CellDetailsDelegate?
+    weak var delegate: SaveCreateCardsDelegate?
     
-    private var selectedCard: Cards!
+    public var selectedCard: Cards!
     
     private var isPressed = false
     
@@ -60,12 +56,14 @@ class MyCardsCell: UICollectionViewCell {
         answersConstraints()
         addGestureRecognizer(longPressGesture)
     }
+    
     @objc private func moreButtonPressed(_ sender: UIButton) {
-        guard let card = selectedCard else {
-            return
+        if let card = selectedCard {
+            delegate?.didCreateCard(card: card)
         }
-        delegate?.didPressButton(cell: self, card: card)
+
     }
+    
     @objc private func longPressed(_ gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began || gesture.state == .changed {
             return
@@ -95,7 +93,8 @@ class MyCardsCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             moreButton.topAnchor.constraint(equalTo: topAnchor),
             moreButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            moreButton.heightAnchor.constraint(equalToConstant: 60)
+            moreButton.heightAnchor.constraint(equalToConstant: 44),
+            moreButton.widthAnchor.constraint(equalTo: moreButton.heightAnchor)
         ])
     }
     
