@@ -27,7 +27,7 @@ class MyCardsView: UIView {
         commonInit()
     }
     private func commonInit() {
-        
+        collectionViewConstraints()
     }
     private func collectionViewConstraints() {
         addSubview(collectionView)
@@ -40,5 +40,6 @@ class MyCardsView: UIView {
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor)
         ])
     }
+    
 
 }

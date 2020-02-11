@@ -10,6 +10,11 @@ import UIKit
 
 class CreateCardsViewController: UIViewController {
 
+    private let createView = CreateCardsView()
+    
+    override func loadView() {
+        view = createView
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
