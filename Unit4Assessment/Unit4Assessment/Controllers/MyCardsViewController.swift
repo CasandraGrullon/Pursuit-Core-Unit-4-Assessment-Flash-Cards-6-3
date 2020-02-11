@@ -14,7 +14,7 @@ class MyCardsViewController: UIViewController {
     private var mycardsView = MyCardsView()
     public var dataPersistence: DataPersistence<Cards>!
     
-    public var myCards = [Cards]() {
+    private var myCards = [Cards]() {
         didSet {
             mycardsView.collectionView.reloadData()
             if myCards.isEmpty {

@@ -85,8 +85,6 @@ class CreateCardsView: UIView {
         titleTextField.text = ""
         factOneText.text = ""
         factTwoText.text = ""
-        saveButton.isEnabled = false
-        alert.alpha = 0
     }
     
     override init(frame: CGRect) {
