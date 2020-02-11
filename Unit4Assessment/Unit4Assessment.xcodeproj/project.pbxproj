@@ -21,6 +21,7 @@
 		C6D3DAB423F2FABE00DDFA55 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3DAB323F2FABE00DDFA55 /* TabBar.swift */; };
 		C6D9B52923F3019200FF4B84 /* MyCardsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D9B52823F3019200FF4B84 /* MyCardsCell.swift */; };
 		C6D9B52D23F3094500FF4B84 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D9B52C23F3094500FF4B84 /* EmptyView.swift */; };
+		C6D9B52F23F30D7A00FF4B84 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D9B52E23F30D7A00FF4B84 /* SearchCell.swift */; };
 		C6DADE2323F2FF2000C0ADFF /* FlashCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DADE2223F2FF2000C0ADFF /* FlashCard.swift */; };
 		C6DADE2623F2FFB700C0ADFF /* CardsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DADE2523F2FFB700C0ADFF /* CardsAPIClient.swift */; };
 		C6DADE2923F2FFD800C0ADFF /* ImageKit in Frameworks */ = {isa = PBXBuildFile; productRef = C6DADE2823F2FFD800C0ADFF /* ImageKit */; };
@@ -55,6 +56,7 @@
 		C6D3DAB323F2FABE00DDFA55 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		C6D9B52823F3019200FF4B84 /* MyCardsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCardsCell.swift; sourceTree = "<group>"; };
 		C6D9B52C23F3094500FF4B84 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		C6D9B52E23F30D7A00FF4B84 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		C6DADE2223F2FF2000C0ADFF /* FlashCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCard.swift; sourceTree = "<group>"; };
 		C6DADE2523F2FFB700C0ADFF /* CardsAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsAPIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				C6D9B52823F3019200FF4B84 /* MyCardsCell.swift */,
+				C6D9B52E23F30D7A00FF4B84 /* SearchCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				C6D3DAB423F2FABE00DDFA55 /* TabBar.swift in Sources */,
 				C6D9B52D23F3094500FF4B84 /* EmptyView.swift in Sources */,
 				C6D3DAAC23F2FA6100DDFA55 /* MyCardsView.swift in Sources */,
+				C6D9B52F23F30D7A00FF4B84 /* SearchCell.swift in Sources */,
 				C6DADE2623F2FFB700C0ADFF /* CardsAPIClient.swift in Sources */,
 				C6D3DAAE23F2FA7B00DDFA55 /* CreateCardsView.swift in Sources */,
 				C6D3DAAA23F2FA5100DDFA55 /* SearchCardsViewController.swift in Sources */,

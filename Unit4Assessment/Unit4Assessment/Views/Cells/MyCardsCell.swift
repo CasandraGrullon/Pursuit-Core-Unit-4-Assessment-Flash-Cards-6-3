@@ -26,7 +26,7 @@ class MyCardsCell: UICollectionViewCell {
         commonInit()
     }
     private func commonInit() {
-        
+        titleConstraints()
     }
     private func titleConstraints() {
         addSubview(cardTitle)
